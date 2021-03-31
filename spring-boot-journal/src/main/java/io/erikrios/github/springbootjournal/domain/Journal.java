@@ -70,7 +70,7 @@ public class Journal {
 
 	@Override
 	public String toString() {
-		StringBuilder value = new StringBuilder("JOurnalEntry(");
+		StringBuilder value = new StringBuilder("JournalEntry(");
 		value.append("Id: ");
 		value.append(id);
 		value.append(",Title: ");
