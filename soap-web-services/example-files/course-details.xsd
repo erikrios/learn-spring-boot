@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
         targetNamespace="http://erikrios.github.io/courses"
-        elementFormDefault="qualified">
+        elementFormDefault="qualified"
+        xmlns:tns="http://erikrios.github.io/courses">
     <element name="GetCourseDetailsRequest">
         <complexType>
             <sequence>
@@ -12,16 +13,15 @@
     <element name="GetCourseDetailsResponse">
         <complexType>
             <sequence>
-                <element name="CourseDetails">
-                    <complexType>
-                        <sequence>
-                            <element name="id" type="integer"/>
-                            <element name="name" type="string"/>
-                            <element name="description" type="string"/>
-                        </sequence>
-                    </complexType>
-                </element>
+                <element name="CourseDetails" type="tns:CourseDetails"/>
             </sequence>
         </complexType>
     </element>
+    <complexType name="CourseDetails">
+        <sequence>
+            <element name="id" type="integer"/>
+            <element name="name" type="string"/>
+            <element name="description" type="string"/>
+        </sequence>
+    </complexType>
 </schema>
