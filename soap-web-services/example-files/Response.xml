@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GetCourseDetailsResponse xmlns="http://erikrios.github.io/courses">
+    <id>123</id>
+    <name>Spring Boot SOAP Web Services Tutorial</name>
+    <description>You would learn the basics of Spring Framework</description>
+</GetCourseDetailsResponse>
