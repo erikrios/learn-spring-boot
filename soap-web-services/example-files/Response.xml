@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<GetCourseDetailsResponse xmlns="http://erikrios.github.io/courses">
+<GetCourseDetailsResponse xmlns="http://erikrios.github.io/courses"
+                          xsi:schemaLocation="http://erikrios.github.io/courses course-details.xsd"
+                          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <id>123</id>
     <name>Spring Boot SOAP Web Services Tutorial</name>
     <description>You would learn the basics of Spring Framework</description>
