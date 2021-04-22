@@ -12,9 +12,15 @@
     <element name="GetCourseDetailsResponse">
         <complexType>
             <sequence>
-                <element name="id" type="integer"/>
-                <element name="name" type="string"/>
-                <element name="description" type="string"/>
+                <element name="CourseDetails">
+                    <complexType>
+                        <sequence>
+                            <element name="id" type="integer"/>
+                            <element name="name" type="string"/>
+                            <element name="description" type="string"/>
+                        </sequence>
+                    </complexType>
+                </element>
             </sequence>
         </complexType>
     </element>
