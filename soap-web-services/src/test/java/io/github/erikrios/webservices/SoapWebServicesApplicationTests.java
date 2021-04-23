@@ -1,4 +1,4 @@
-package io.erikrios.github.webservices;
+package io.github.erikrios.webservices;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

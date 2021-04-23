@@ -1,4 +1,4 @@
-package io.erikrios.github.webservices;
+package io.github.erikrios.webservices;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
