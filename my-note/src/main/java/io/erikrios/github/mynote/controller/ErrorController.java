@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +25,14 @@ public class ErrorController {
                 .stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .collect(Collectors.toList());
+        return new Response<>(ERROR, errors, null);
+    }
+
+    @ExceptionHandler(value = {ClassNotFoundException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Response<String> handleClassNotFoundException(ClassNotFoundException exception) {
+        List<String> errors = new ArrayList<>();
+        errors.add(exception.getMessage());
         return new Response<>(ERROR, errors, null);
     }
 }
