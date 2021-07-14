@@ -9,6 +9,7 @@ import java.util.UUID;
 public class Category {
 
     @Id
+    @Column(length = 50)
     private final String id;
     @Column(length = 25)
     private String name;

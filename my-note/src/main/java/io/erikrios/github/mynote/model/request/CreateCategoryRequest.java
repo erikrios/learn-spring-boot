@@ -1,15 +1,21 @@
 package io.erikrios.github.mynote.model.request;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class CreateCategoryRequest {
-    @NotBlank
-    @NotNull
-    private final String name;
+    @NotBlank(message = "name field should be not blank")
+    @NotNull(message = "name field should be not null")
+    @Length(min = 2, max = 25)
+    private String name;
 
     public CreateCategoryRequest(String name) {
         this.name = name;
+    }
+
+    public CreateCategoryRequest() {
     }
 
     public String getName() {

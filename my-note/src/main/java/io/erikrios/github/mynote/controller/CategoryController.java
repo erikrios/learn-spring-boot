@@ -8,10 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/api")
+import javax.validation.Valid;
+
+@RestController
 public class CategoryController {
 
     private final CategoryService service;
@@ -22,12 +25,12 @@ public class CategoryController {
     }
 
     @PostMapping(
-            value = "/categories",
+            value = "/api/categories",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Response<CategoryResponse> saveCategory(CreateCategoryRequest request) {
+    public Response<CategoryResponse> saveCategory(@Valid @RequestBody CreateCategoryRequest request) {
         CategoryResponse response = service.insert(request);
         return new Response<>("success", null, response);
     }
