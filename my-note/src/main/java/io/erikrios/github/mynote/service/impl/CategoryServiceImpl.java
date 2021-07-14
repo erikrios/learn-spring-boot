@@ -41,7 +41,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryResponse findById(String id) throws CategoryNotFoundException {
         Optional<Category> category = repository.findById(id);
-        if (!category.isPresent()) throw new CategoryNotFoundException("Category with id " + id + " found.");
+        if (!category.isPresent()) throw new CategoryNotFoundException("Category with id " + id + " not found.");
         return convertCategoryToResponse(category.get());
     }
 
