@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static io.erikrios.github.mynote.utils.Status.ERROR;
+
 @RestControllerAdvice
 public class ErrorController {
 
@@ -22,6 +24,6 @@ public class ErrorController {
                 .stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .collect(Collectors.toList());
-        return new Response<>("error", errors, null);
+        return new Response<>(ERROR, errors, null);
     }
 }
