@@ -1,5 +1,6 @@
 package io.erikrios.github.mynote.controller;
 
+import io.erikrios.github.mynote.error.CategoryNotFoundException;
 import io.erikrios.github.mynote.model.request.CreateCategoryRequest;
 import io.erikrios.github.mynote.model.response.CategoryResponse;
 import io.erikrios.github.mynote.model.response.Response;
@@ -42,5 +43,14 @@ public class CategoryController {
     public Response<List<CategoryResponse>> getAllCategory() {
         List<CategoryResponse> categoryResponses = service.findAll();
         return new Response<>(SUCCESS, null, categoryResponses);
+    }
+
+    @GetMapping(
+            value = "/api/categories/{id}",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public Response<CategoryResponse> getCategoryById(@PathVariable("id") String id) throws CategoryNotFoundException {
+        CategoryResponse categoryResponse = service.findById(id);
+        return new Response<>(SUCCESS, null, categoryResponse);
     }
 }
