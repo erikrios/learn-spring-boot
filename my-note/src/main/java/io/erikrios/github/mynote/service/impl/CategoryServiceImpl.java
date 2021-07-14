@@ -8,6 +8,9 @@ import io.erikrios.github.mynote.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
@@ -23,6 +26,16 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = new Category(request.getName());
         Category saved = repository.save(category);
         return convertCategoryToResponse(saved);
+    }
+
+    @Override
+    public List<CategoryResponse> findAll() {
+        List<CategoryResponse> categoryResponses = new ArrayList<>();
+        List<Category> categories = repository.findAll();
+
+        categories.forEach(category -> categoryResponses.add(convertCategoryToResponse(category)));
+
+        return categoryResponses;
     }
 
     private CategoryResponse convertCategoryToResponse(Category category) {
