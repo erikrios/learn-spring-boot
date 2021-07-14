@@ -1,5 +1,6 @@
 ### Create a category
 POST http://localhost:5000/api/categories
+Accept: application/json
 Content-Type: application/json
 
 {
@@ -8,5 +9,9 @@ Content-Type: application/json
 
 ### Get all category
 GET http://localhost:5000/api/categories
+Accept: application/json
+
+### Get all category
+GET http://localhost:5000/api/categories/4c166cc7-3573-40de-8aa8-1d8679878843
 Accept: application/json
 
