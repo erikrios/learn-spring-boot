@@ -1,0 +1,12 @@
+### Create a category
+POST http://localhost:5000/api/categories
+Content-Type: application/json
+
+{
+  "name": "Computer Science"
+}
+
+### Get all category
+GET http://localhost:5000/api/categories
+Accept: application/json
+
