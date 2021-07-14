@@ -7,12 +7,12 @@ import io.erikrios.github.mynote.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+
+import static io.erikrios.github.mynote.utils.Status.SUCCESS;
 
 @RestController
 public class CategoryController {
@@ -32,6 +32,15 @@ public class CategoryController {
     @ResponseStatus(code = HttpStatus.CREATED)
     public Response<CategoryResponse> saveCategory(@Valid @RequestBody CreateCategoryRequest request) {
         CategoryResponse response = service.insert(request);
-        return new Response<>("success", null, response);
+        return new Response<>(SUCCESS, null, response);
+    }
+
+    @GetMapping(
+            value = "/api/categories",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public Response<List<CategoryResponse>> getAllCategory() {
+        List<CategoryResponse> categoryResponses = service.findAll();
+        return new Response<>(SUCCESS, null, categoryResponses);
     }
 }
