@@ -1,15 +1,23 @@
 package io.erikrios.github.mynote.error;
 
 public class CategoryNotFoundException extends Exception {
-    private final String message;
+
+    public CategoryNotFoundException() {
+    }
 
     public CategoryNotFoundException(String message) {
         super(message);
-        this.message = message;
     }
 
-    @Override
-    public String getMessage() {
-        return message;
+    public CategoryNotFoundException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public CategoryNotFoundException(Throwable cause) {
+        super(cause);
+    }
+
+    public CategoryNotFoundException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
     }
 }
