@@ -1,4 +1,4 @@
-package io.erikrios.github.mynote.domain;
+package io.erikrios.github.mynote.model.response;
 
 public class Response<T> {
     private final String status;
