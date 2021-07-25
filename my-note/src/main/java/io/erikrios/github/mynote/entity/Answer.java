@@ -20,11 +20,10 @@ public class Answer {
     @JoinColumn(name = "question_id")
     private Question question;
 
-    public Answer(String answer, boolean isCorrect, Question question) {
+    public Answer(String answer, boolean isCorrect) {
         id = UUID.randomUUID().toString();
         this.answer = answer;
         this.isCorrect = isCorrect;
-        this.question = question;
     }
 
     public Answer() {
