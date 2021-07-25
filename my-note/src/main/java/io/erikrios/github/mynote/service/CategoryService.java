@@ -15,4 +15,6 @@ public interface CategoryService {
     CategoryResponse findById(String id) throws CategoryNotFoundException;
 
     CategoryResponse update(String id, CreateCategoryRequest request) throws CategoryNotFoundException;
+
+    CategoryResponse delete(String id) throws CategoryNotFoundException;
 }

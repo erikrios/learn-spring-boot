@@ -40,9 +40,10 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryResponse findById(String id) throws CategoryNotFoundException {
-        Optional<Category> category = repository.findById(id);
-        if (!category.isPresent()) throw new CategoryNotFoundException("Category with id " + id + " not found.");
-        return convertCategoryToResponse(category.get());
+        Optional<Category> optionalCategory = repository.findById(id);
+        if (!optionalCategory.isPresent())
+            throw new CategoryNotFoundException("Category with id " + id + " not found.");
+        return convertCategoryToResponse(optionalCategory.get());
     }
 
     private CategoryResponse convertCategoryToResponse(Category category) {
@@ -57,6 +58,16 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = optionalCategory.get();
         category.setName(request.getName());
         repository.save(category);
+        return convertCategoryToResponse(category);
+    }
+
+    @Override
+    public CategoryResponse delete(String id) throws CategoryNotFoundException {
+        Optional<Category> optionalCategory = repository.findById(id);
+        if (!optionalCategory.isPresent())
+            throw new CategoryNotFoundException("Category with id " + id + " not found.");
+        Category category = optionalCategory.get();
+        repository.delete(category);
         return convertCategoryToResponse(category);
     }
 }
