@@ -16,7 +16,7 @@ public class Answer {
     @Column(nullable = false)
     private boolean isCorrect;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id")
     private Question question;
 
