@@ -1,7 +1,5 @@
 package io.erikrios.github.mynote.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -20,7 +18,6 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category")
-    @JsonIgnore
     private List<Question> questions;
 
     public Category(String name) {

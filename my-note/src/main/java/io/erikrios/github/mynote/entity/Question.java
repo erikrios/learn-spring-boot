@@ -1,7 +1,5 @@
 package io.erikrios.github.mynote.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +20,6 @@ public class Question {
 
     @ManyToOne
     @JoinColumn(name = "category_id")
-    @JsonIgnore
     private Category category;
 
     public Question(String question, List<Answer> answers) {
