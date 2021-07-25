@@ -12,15 +12,18 @@ GET http://localhost:5000/api/categories
 Accept: application/json
 
 ### Get category by id
-GET http://localhost:5000/api/categories/4c166cc7-3573-40de-8aa8-1d8679878843
+GET http://localhost:5000/api/categories/ff00fe2b-56fc-4465-a946-b388732da97a
 Accept: application/json
 
 ### Update category
-PUT http://localhost:5000/api/categories/4c166cc7-3573-40de-8aa8-1d8679878843
-
+PUT http://localhost:5000/api/categories/ff00fe2b-56fc-4465-a946-b388732da97a
 Accept: application/json
 Content-Type: application/json
 
 {
-  "name": "Computer Science"
+  "name": "Algorithm"
 }
+
+### Delete category
+DELETE http://localhost:5000/api/categories/ff00fe2b-56fc-4465-a946-b388732da97a
+Accept: application/json
