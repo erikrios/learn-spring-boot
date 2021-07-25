@@ -15,3 +15,12 @@ Accept: application/json
 GET http://localhost:5000/api/categories/4c166cc7-3573-40de-8aa8-1d8679878843
 Accept: application/json
 
+### Update category
+PUT http://localhost:5000/api/categories/4c166cc7-3573-40de-8aa8-1d8679878843
+
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Computer Science"
+}
