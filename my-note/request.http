@@ -12,11 +12,11 @@ GET http://localhost:5000/api/categories
 Accept: application/json
 
 ### Get category by id
-GET http://localhost:5000/api/categories/ff00fe2b-56fc-4465-a946-b388732da97a
+GET http://localhost:5000/api/categories/693d0120-dd3c-45d9-b9a7-291d8fe26d6f
 Accept: application/json
 
 ### Update category
-PUT http://localhost:5000/api/categories/ff00fe2b-56fc-4465-a946-b388732da97a
+PUT http://localhost:5000/api/categories/693d0120-dd3c-45d9-b9a7-291d8fe26d6f
 Accept: application/json
 Content-Type: application/json
 
@@ -25,5 +25,32 @@ Content-Type: application/json
 }
 
 ### Delete category
-DELETE http://localhost:5000/api/categories/ff00fe2b-56fc-4465-a946-b388732da97a
+DELETE http://localhost:5000/api/categories/693d0120-dd3c-45d9-b9a7-291d8fe26d6f
 Accept: application/json
+
+### Create a question
+POST http://localhost:5000/api/categories/ff00658b-3472-4f50-a743-e6e1a3952f76/questions
+Accept: application/json
+Content-Type: application/json
+
+{
+  "question": "The founder of Linux is?",
+  "answers": [
+    {
+      "answer": "Bill Gates",
+      "isCorrect": false
+    },
+    {
+      "answer": "Mark Zuckerberg",
+      "isCorrect": false
+    },
+    {
+      "answer": "Linus Torvalds",
+      "isCorrect": true
+    },
+    {
+      "answer": "Jack Ma",
+      "isCorrect": false
+    }
+  ]
+}
