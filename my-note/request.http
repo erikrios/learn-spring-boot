@@ -12,11 +12,11 @@ GET http://localhost:5000/api/categories
 Accept: application/json
 
 ### Get category by id
-GET http://localhost:5000/api/categories/693d0120-dd3c-45d9-b9a7-291d8fe26d6f
+GET http://localhost:5000/api/categories/0449a91a-3a53-4e1c-aac7-b57b9513434b
 Accept: application/json
 
 ### Update category
-PUT http://localhost:5000/api/categories/693d0120-dd3c-45d9-b9a7-291d8fe26d6f
+PUT http://localhost:5000/api/categories/0449a91a-3a53-4e1c-aac7-b57b9513434b
 Accept: application/json
 Content-Type: application/json
 
@@ -25,11 +25,11 @@ Content-Type: application/json
 }
 
 ### Delete category
-DELETE http://localhost:5000/api/categories/693d0120-dd3c-45d9-b9a7-291d8fe26d6f
+DELETE http://localhost:5000/api/categories/0449a91a-3a53-4e1c-aac7-b57b9513434b
 Accept: application/json
 
 ### Create a question
-POST http://localhost:5000/api/categories/ff00658b-3472-4f50-a743-e6e1a3952f76/questions
+POST http://localhost:5000/api/categories/0449a91a-3a53-4e1c-aac7-b57b9513434b/questions
 Accept: application/json
 Content-Type: application/json
 
