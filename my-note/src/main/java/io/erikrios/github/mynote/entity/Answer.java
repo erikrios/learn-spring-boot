@@ -1,5 +1,7 @@
 package io.erikrios.github.mynote.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.UUID;
 
@@ -18,6 +20,7 @@ public class Answer {
 
     @ManyToOne
     @JoinColumn(name = "question_id")
+    @JsonIgnore
     private Question question;
 
     public Answer(String answer, boolean isCorrect, Question question) {

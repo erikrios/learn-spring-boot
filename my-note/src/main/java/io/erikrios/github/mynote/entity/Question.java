@@ -1,9 +1,8 @@
 package io.erikrios.github.mynote.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -18,9 +17,14 @@ public class Question {
     @Column(nullable = false)
     private String question;
 
-    @Column(nullable = false)
     @OneToMany(mappedBy = "question")
+    @JsonIgnore
     private List<Answer> answers;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    @JsonIgnore
+    private Category category;
 
     public Question(String question, List<Answer> answers) {
         id = UUID.randomUUID().toString();
@@ -52,5 +56,13 @@ public class Question {
 
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
