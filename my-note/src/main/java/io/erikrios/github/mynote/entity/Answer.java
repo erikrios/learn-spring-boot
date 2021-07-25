@@ -8,7 +8,7 @@ public class Answer {
 
     @Id
     @Column(length = 50)
-    private String id;
+    private final String id;
 
     @Column(nullable = false)
     private String answer;
@@ -28,6 +28,9 @@ public class Answer {
     }
 
     public Answer() {
+        id = UUID.randomUUID().toString();
+        answer = "answer";
+        isCorrect = false;
     }
 
     public String getId() {
