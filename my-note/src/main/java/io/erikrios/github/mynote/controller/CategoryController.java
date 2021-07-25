@@ -66,4 +66,13 @@ public class CategoryController {
         CategoryResponse categoryResponse = service.update(id, request);
         return new Response<>(SUCCESS, null, categoryResponse);
     }
+
+    @DeleteMapping(
+            value = "/api/categories/{id}",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public Response<CategoryResponse> deleteCategory(@PathVariable("id") String id) throws CategoryNotFoundException {
+        CategoryResponse categoryResponse = service.delete(id);
+        return new Response<>(SUCCESS, null, categoryResponse);
+    }
 }
