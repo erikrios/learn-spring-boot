@@ -16,7 +16,7 @@ public class Question {
     private String question;
 
     @OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Answer> answers;
+    private List<Answer> answers = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
@@ -31,7 +31,6 @@ public class Question {
     public Question() {
         id = UUID.randomUUID().toString();
         question = "question";
-        answers = new ArrayList<>();
     }
 
     public String getId() {

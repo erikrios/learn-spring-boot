@@ -1,6 +1,7 @@
 package io.erikrios.github.mynote.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,7 +16,7 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
-    private List<Question> questions;
+    private List<Question> questions = new ArrayList<>();
 
     public Category(String name) {
         this.id = UUID.randomUUID().toString();
