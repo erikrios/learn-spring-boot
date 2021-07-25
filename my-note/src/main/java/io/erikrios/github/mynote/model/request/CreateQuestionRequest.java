@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 public class CreateQuestionRequest {
@@ -13,8 +14,7 @@ public class CreateQuestionRequest {
     @Length(min = 2, max = 255)
     private String question;
 
-    @NotBlank(message = "answers field should be not blank")
-    @NotNull(message = "answers field should be not null")
+    @Size(min = 2, max = 6)
     private List<CreateAnswerRequest> answers;
 
     public CreateQuestionRequest(String question, List<CreateAnswerRequest> answers) {
