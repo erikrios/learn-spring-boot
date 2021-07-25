@@ -46,10 +46,6 @@ public class CategoryServiceImpl implements CategoryService {
         return convertCategoryToResponse(optionalCategory.get());
     }
 
-    private CategoryResponse convertCategoryToResponse(Category category) {
-        return new CategoryResponse(category.getId(), category.getName());
-    }
-
     @Override
     public CategoryResponse update(String id, CreateCategoryRequest request) throws CategoryNotFoundException {
         Optional<Category> optionalCategory = repository.findById(id);
@@ -69,5 +65,9 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = optionalCategory.get();
         repository.delete(category);
         return convertCategoryToResponse(category);
+    }
+
+    private CategoryResponse convertCategoryToResponse(Category category) {
+        return new CategoryResponse(category.getId(), category.getName());
     }
 }
