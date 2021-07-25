@@ -43,8 +43,10 @@ public class QuestionServiceImpl implements QuestionService {
 
         Question question = convertRequestToQuestion(request);
         question.setCategory(category);
-
         Question saved = questionRepository.save(question);
+
+        answerRepository.saveAll(convertRequestToAnswers(request.getAnswers()));
+
         return convertQuestionToResponse(saved);
     }
 
