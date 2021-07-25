@@ -22,9 +22,10 @@ public class Question {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    public Question(String question) {
+    public Question(String question, Category category) {
         id = UUID.randomUUID().toString();
         this.question = question;
+        this.category = category;
     }
 
     public Question() {
