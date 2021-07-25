@@ -53,4 +53,17 @@ public class CategoryController {
         CategoryResponse categoryResponse = service.findById(id);
         return new Response<>(SUCCESS, null, categoryResponse);
     }
+
+    @PutMapping(
+            value = "/api/categories/{id}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public Response<CategoryResponse> updateCategory(
+            @PathVariable("id") String id,
+            @Valid @RequestBody CreateCategoryRequest request
+    ) throws CategoryNotFoundException {
+        CategoryResponse categoryResponse = service.update(id, request);
+        return new Response<>(SUCCESS, null, categoryResponse);
+    }
 }
