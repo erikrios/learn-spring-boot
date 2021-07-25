@@ -12,6 +12,8 @@ import io.erikrios.github.mynote.repository.AnswerRepository;
 import io.erikrios.github.mynote.repository.CategoryRepository;
 import io.erikrios.github.mynote.repository.QuestionRepository;
 import io.erikrios.github.mynote.service.QuestionService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,8 @@ public class QuestionServiceImpl implements QuestionService {
     private final CategoryRepository categoryRepository;
     private final AnswerRepository answerRepository;
 
+    Logger logger = LoggerFactory.getLogger(QuestionServiceImpl.class);
+
     @Autowired
     public QuestionServiceImpl(
             QuestionRepository repository,
@@ -37,22 +41,24 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public QuestionResponse insert(String categoryId, CreateQuestionRequest request) throws CategoryNotFoundException {
+        logger.info(request.toString());
         Category category = categoryRepository
                 .findById(categoryId)
                 .orElseThrow(() -> new CategoryNotFoundException("Category with id " + categoryId + " not found."));
 
-        Question question = convertRequestToQuestion(request);
-        question.setCategory(category);
-        Question saved = questionRepository.save(question);
+        Question question = convertRequestToQuestion(request, category);
 
-        answerRepository.saveAll(convertRequestToAnswers(request.getAnswers()));
+        Question savedQuestion = questionRepository.save(question);
 
-        return convertQuestionToResponse(saved);
+        List<Answer> savedAnswers = answerRepository.saveAll(convertRequestToAnswers(request.getAnswers(), savedQuestion));
+        savedQuestion.setAnswers(savedAnswers);
+
+        return convertQuestionToResponse(savedQuestion);
     }
 
-    private Question convertRequestToQuestion(CreateQuestionRequest request) {
+    private Question convertRequestToQuestion(CreateQuestionRequest request, Category category) {
         String question = request.getQuestion();
-        return new Question(question);
+        return new Question(question, category);
     }
 
     private QuestionResponse convertQuestionToResponse(Question question) {
@@ -66,11 +72,11 @@ public class QuestionServiceImpl implements QuestionService {
         return new QuestionResponse(id, questionName, answerResponses);
     }
 
-    private List<Answer> convertRequestToAnswers(List<CreateAnswerRequest> requests) {
+    private List<Answer> convertRequestToAnswers(List<CreateAnswerRequest> requests, Question question) {
         return requests
                 .stream()
                 .map(request ->
-                        new Answer(request.getAnswer(), request.isCorrect())
+                        new Answer(request.getAnswer(), request.isCorrect(), question)
                 ).collect(Collectors.toList());
     }
 
