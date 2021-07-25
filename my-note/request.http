@@ -29,7 +29,7 @@ DELETE http://localhost:5000/api/categories/0449a91a-3a53-4e1c-aac7-b57b9513434b
 Accept: application/json
 
 ### Create a question
-POST http://localhost:5000/api/categories/0449a91a-3a53-4e1c-aac7-b57b9513434b/questions
+POST http://localhost:5000/api/categories/f3e550a9-7a75-4831-a286-0ac866aeab06/questions
 Accept: application/json
 Content-Type: application/json
 
