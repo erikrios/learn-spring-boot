@@ -8,7 +8,6 @@ import io.erikrios.github.mynote.model.request.CreateAnswerRequest;
 import io.erikrios.github.mynote.model.request.CreateQuestionRequest;
 import io.erikrios.github.mynote.model.response.AnswerResponse;
 import io.erikrios.github.mynote.model.response.QuestionResponse;
-import io.erikrios.github.mynote.repository.AnswerRepository;
 import io.erikrios.github.mynote.repository.CategoryRepository;
 import io.erikrios.github.mynote.repository.QuestionRepository;
 import io.erikrios.github.mynote.service.QuestionService;
@@ -23,16 +22,14 @@ public class QuestionServiceImpl implements QuestionService {
 
     private final QuestionRepository questionRepository;
     private final CategoryRepository categoryRepository;
-    private final AnswerRepository answerRepository;
 
     @Autowired
     public QuestionServiceImpl(
             QuestionRepository repository,
-            CategoryRepository categoryRepository,
-            AnswerRepository answerRepository) {
+            CategoryRepository categoryRepository
+    ) {
         this.questionRepository = repository;
         this.categoryRepository = categoryRepository;
-        this.answerRepository = answerRepository;
     }
 
     @Override
@@ -45,25 +42,21 @@ public class QuestionServiceImpl implements QuestionService {
 
         Question savedQuestion = questionRepository.save(question);
 
-        List<Answer> savedAnswers = answerRepository.saveAll(convertRequestToAnswers(request.getAnswers(), savedQuestion));
-        savedQuestion.setAnswers(savedAnswers);
-
         return convertQuestionToResponse(savedQuestion);
     }
 
     private Question convertRequestToQuestion(CreateQuestionRequest request, Category category) {
-        String question = request.getQuestion();
-        return new Question(question, category);
+        String questionStatement = request.getQuestion();
+        Question question = new Question(questionStatement, category);
+        question.setAnswers(convertRequestToAnswers(request.getAnswers(), question));
+        return question;
     }
 
     private QuestionResponse convertQuestionToResponse(Question question) {
         String id = question.getId();
         String questionName = question.getQuestion();
         List<Answer> answers = question.getAnswers();
-        List<AnswerResponse> answerResponses = answers.stream().map(answer ->
-                new AnswerResponse(answer.getId(), answer.getAnswer(), answer.isCorrect())
-        )
-                .collect(Collectors.toList());
+        List<AnswerResponse> answerResponses = convertAnswersToResponse(answers);
         return new QuestionResponse(id, questionName, answerResponses);
     }
 
@@ -75,11 +68,11 @@ public class QuestionServiceImpl implements QuestionService {
                 ).collect(Collectors.toList());
     }
 
-    private List<CreateAnswerRequest> convertAnswersToRequest(List<Answer> answers) {
+    private List<AnswerResponse> convertAnswersToResponse(List<Answer> answers) {
         return answers
                 .stream()
                 .map(answer ->
-                        new CreateAnswerRequest(answer.getAnswer(), answer.isCorrect())
+                        new AnswerResponse(answer.getId(), answer.getAnswer(), answer.isCorrect())
                 ).collect(Collectors.toList());
     }
 }
