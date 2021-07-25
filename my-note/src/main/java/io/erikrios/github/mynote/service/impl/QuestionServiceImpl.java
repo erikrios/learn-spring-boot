@@ -12,8 +12,6 @@ import io.erikrios.github.mynote.repository.AnswerRepository;
 import io.erikrios.github.mynote.repository.CategoryRepository;
 import io.erikrios.github.mynote.repository.QuestionRepository;
 import io.erikrios.github.mynote.service.QuestionService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +25,6 @@ public class QuestionServiceImpl implements QuestionService {
     private final CategoryRepository categoryRepository;
     private final AnswerRepository answerRepository;
 
-    Logger logger = LoggerFactory.getLogger(QuestionServiceImpl.class);
-
     @Autowired
     public QuestionServiceImpl(
             QuestionRepository repository,
@@ -41,7 +37,6 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public QuestionResponse insert(String categoryId, CreateQuestionRequest request) throws CategoryNotFoundException {
-        logger.info(request.toString());
         Category category = categoryRepository
                 .findById(categoryId)
                 .orElseThrow(() -> new CategoryNotFoundException("Category with id " + categoryId + " not found."));
