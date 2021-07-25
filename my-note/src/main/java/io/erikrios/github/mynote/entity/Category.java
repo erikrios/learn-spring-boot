@@ -11,7 +11,7 @@ public class Category {
     @Id
     @Column(length = 50)
     private final String id;
-    @Column(length = 25)
+    @Column(length = 25, nullable = false)
     private String name;
 
     public Category(String name) {
