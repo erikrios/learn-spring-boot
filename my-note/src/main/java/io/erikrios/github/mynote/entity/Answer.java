@@ -17,7 +17,7 @@ public class Answer {
     private boolean isCorrect;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "question_id")
+    @JoinColumn(name = "question_id", referencedColumnName = "id", nullable = false)
     private Question question;
 
     public Answer(String answer, boolean isCorrect, Question question) {

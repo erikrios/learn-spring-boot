@@ -1,9 +1,6 @@
 package io.erikrios.github.mynote.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,7 +14,7 @@ public class Category {
     @Column(length = 25, nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private List<Question> questions;
 
     public Category(String name) {
