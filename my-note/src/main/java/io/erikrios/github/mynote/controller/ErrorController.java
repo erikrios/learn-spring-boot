@@ -1,6 +1,7 @@
 package io.erikrios.github.mynote.controller;
 
 import io.erikrios.github.mynote.error.CategoryNotFoundException;
+import io.erikrios.github.mynote.error.QuestionNotFoundException;
 import io.erikrios.github.mynote.model.response.Response;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
@@ -32,6 +33,14 @@ public class ErrorController {
     @ExceptionHandler(value = {CategoryNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public Response<String> handleCategoryNotFoundException(CategoryNotFoundException exception) {
+        List<String> errors = new ArrayList<>();
+        errors.add(exception.getMessage());
+        return new Response<>(ERROR, errors, null);
+    }
+
+    @ExceptionHandler(value = {QuestionNotFoundException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Response<String> handleQuestionNotFoundException(QuestionNotFoundException exception) {
         List<String> errors = new ArrayList<>();
         errors.add(exception.getMessage());
         return new Response<>(ERROR, errors, null);
