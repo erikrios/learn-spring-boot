@@ -4,6 +4,7 @@ import io.erikrios.github.mynote.entity.Answer;
 import io.erikrios.github.mynote.entity.Category;
 import io.erikrios.github.mynote.entity.Question;
 import io.erikrios.github.mynote.error.CategoryNotFoundException;
+import io.erikrios.github.mynote.error.QuestionNotFoundException;
 import io.erikrios.github.mynote.model.request.CreateAnswerRequest;
 import io.erikrios.github.mynote.model.request.CreateQuestionRequest;
 import io.erikrios.github.mynote.model.response.AnswerResponse;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,6 +45,13 @@ public class QuestionServiceImpl implements QuestionService {
         Question savedQuestion = questionRepository.save(question);
 
         return convertQuestionToResponse(savedQuestion);
+    }
+
+    @Override
+    public QuestionResponse findById(String id) throws QuestionNotFoundException {
+        Optional<Question> optionalQuestion = questionRepository.findById(id);
+        Question question = optionalQuestion.orElseThrow(() -> new QuestionNotFoundException("Question with id " + id + " not found."));
+        return convertQuestionToResponse(question);
     }
 
     private Question convertRequestToQuestion(CreateQuestionRequest request, Category category) {
